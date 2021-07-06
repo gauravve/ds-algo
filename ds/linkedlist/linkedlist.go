@@ -5,7 +5,7 @@ type node struct {
 	next  *node
 }
 type LinkedList struct {
-	root   *node
+	head   *node
 	Length int
 }
 
@@ -15,12 +15,12 @@ func (list *LinkedList) Insert(value interface{}, position int) bool {
 	} else if position == 0 {
 		newNode := &node{
 			value: value,
-			next:  list.root,
+			next:  list.head,
 		}
-		list.root = newNode
+		list.head = newNode
 		list.Length++
 	} else {
-		currentNode := list.root
+		currentNode := list.head
 		currentIndex := 0
 		for ; currentIndex < position-1; currentIndex++ {
 			currentNode = currentNode.next
@@ -48,11 +48,11 @@ func (list *LinkedList) Remove(position int) (value interface{}) {
 		return nil
 	}
 	if position == 0 {
-		value = list.root.value
-		list.root = list.root.next
+		value = list.head.value
+		list.head = list.head.next
 		list.Length--
 	} else {
-		currentNode := list.root
+		currentNode := list.head
 		currentIndex := 0
 		for ; currentIndex < position-1; currentIndex++ {
 			currentNode = currentNode.next
@@ -73,10 +73,22 @@ func (list *LinkedList) Shift() interface{} {
 }
 
 func (list *LinkedList) Traverse() (response []interface{}) {
-	currentNode := list.root
+	currentNode := list.head
 	for currentNode != nil {
 		response = append(response, currentNode.value)
 		currentNode = currentNode.next
+	}
+	return
+}
+
+func (list *LinkedList) Reverse() (reversedList LinkedList) {
+	response := list.Traverse()
+	//reversedList := LinkedList{
+	//	head:   nil,
+	//	Length: 0,
+	//}
+	for i := len(response) - 1; i >= 0; i-- {
+		reversedList.Push(response[i])
 	}
 	return
 }
