@@ -1,6 +1,7 @@
-package linkedlist
+package main
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -36,6 +37,7 @@ func TestList(t *testing.T) {
 	reversedList := l.Reverse()
 	reversedSlice := reversedList.Traverse()
 
+	fmt.Println(reversedSlice)
 	testReversedSlice := []int{20, 15, 10, 1, 2}
 
 	t.Run("Check Reverse", func(t *testing.T) {
@@ -45,5 +47,7 @@ func TestList(t *testing.T) {
 			}
 		}
 	})
+
+	l.FastReverse()
 
 }

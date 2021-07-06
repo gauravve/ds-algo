@@ -1,4 +1,4 @@
-package linkedlist
+package main
 
 type node struct {
 	value interface{}
@@ -81,6 +81,7 @@ func (list *LinkedList) Traverse() (response []interface{}) {
 	return
 }
 
+//T - O(2n)
 func (list *LinkedList) Reverse() (reversedList LinkedList) {
 	response := list.Traverse()
 	//reversedList := LinkedList{
@@ -91,4 +92,21 @@ func (list *LinkedList) Reverse() (reversedList LinkedList) {
 		reversedList.Push(response[i])
 	}
 	return
+}
+
+//O(n)
+func (list *LinkedList) FastReverse() {
+
+	firstNode := list.head
+	secondNode := firstNode.next
+
+	for secondNode != nil {
+		tempNode := secondNode.next
+		secondNode.next = firstNode
+		firstNode = secondNode
+		secondNode = tempNode
+	}
+
+	list.head.next = nil
+	list.head = firstNode
 }
