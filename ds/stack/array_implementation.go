@@ -1,18 +1,18 @@
-package stack
+package main
 
 import "errors"
 
-type Stack struct {
+type ArrayStack struct {
 	top  int
 	list []interface{}
 }
 
-func (stack *Stack) Push(value interface{}) {
+func (stack *ArrayStack) Push(value interface{}) {
 	stack.list = append(stack.list, value)
 	stack.top++
 }
 
-func (stack *Stack) Pop() (value interface{}, err error) {
+func (stack *ArrayStack) Pop() (value interface{}, err error) {
 	if stack.top <= 0 {
 		return nil, errors.New("stack is empty")
 	}
@@ -22,6 +22,6 @@ func (stack *Stack) Pop() (value interface{}, err error) {
 	return
 }
 
-func (stack *Stack) Length() (value int) {
+func (stack *ArrayStack) Length() (value int) {
 	return stack.top
 }
