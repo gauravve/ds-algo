@@ -1,7 +1,6 @@
 package linkedlist
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -35,7 +34,16 @@ func TestList(t *testing.T) {
 	})
 
 	reversedList := l.Reverse()
+	reversedSlice := reversedList.Traverse()
 
-	fmt.Println(reversedList.Traverse())
+	testReversedSlice := []int{20, 15, 10, 1, 2}
+
+	t.Run("Check Reverse", func(t *testing.T) {
+		for i, v := range reversedSlice {
+			if v != testReversedSlice[i] {
+				t.Errorf("Reversed Lists values are not equal")
+			}
+		}
+	})
 
 }
