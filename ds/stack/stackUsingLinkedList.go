@@ -1,4 +1,4 @@
-package main
+package stack
 
 import "fmt"
 
@@ -8,8 +8,8 @@ type Element struct {
 }
 
 type Stack struct {
-	top, bottom *Element
-	len         int
+	Top, Bottom *Element
+	Len         int
 }
 
 func Init(value interface{}) (e *Element) {
@@ -22,22 +22,22 @@ func Init(value interface{}) (e *Element) {
 
 func (stack *Stack) Push(value interface{}) {
 	//First entry in the stack
-	if stack.bottom == nil {
+	if stack.Bottom == nil {
 		newNode := Init(value)
-		stack.bottom = newNode
-		stack.top = newNode
-		stack.len++
+		stack.Bottom = newNode
+		stack.Top = newNode
+		stack.Len++
 	} else {
-		currentNode := stack.top
+		currentNode := stack.Top
 		newNode := Init(value)
-		stack.top = newNode
+		stack.Top = newNode
 		currentNode.next = newNode
-		stack.len++
+		stack.Len++
 	}
 }
 
 func (stack *Stack) Traverse() {
-	currentNode := stack.bottom
+	currentNode := stack.Bottom
 	for currentNode != nil {
 		fmt.Println(currentNode.value)
 		currentNode = currentNode.next
@@ -46,16 +46,16 @@ func (stack *Stack) Traverse() {
 
 func (stack *Stack) Pop() (value interface{}) {
 	//First entry in the stack
-	poppedValue := stack.top.value
-	currentNode := stack.bottom
+	poppedValue := stack.Top.value
+	currentNode := stack.Bottom
 
-	//Run the loop to the top element keeping the previous element in memory
-	for currentNode.next != stack.top {
+	//Run the loop to the Top element keeping the previous element in memory
+	for currentNode.next != stack.Top {
 		currentNode = currentNode.next
 	}
 
-	//Assign top to the previous element
-	stack.top = currentNode
+	//Assign Top to the previous element
+	stack.Top = currentNode
 	currentNode.next = nil
 
 	return poppedValue
